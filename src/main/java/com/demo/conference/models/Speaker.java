@@ -11,6 +11,9 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity(name = "speakers")
 public class Speaker {
 	
@@ -28,7 +31,8 @@ public class Speaker {
 	private byte[] speaker_photo;
 	
 	@ManyToMany(mappedBy = "speakers")
-	private List<Session> Session;
+	@JsonIgnore
+	private List<Session> sessions;
 	
 	public Speaker() {
 
@@ -43,11 +47,11 @@ public class Speaker {
 	}
 
 	public List<Session> getSession() {
-		return Session;
+		return sessions;
 	}
 
 	public void setSession(List<Session> session) {
-		Session = session;
+		sessions = session;
 	}
 
 	public Long getSpeaker_id() {
